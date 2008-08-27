@@ -6,7 +6,7 @@ package com.normsoule.pixelblitz.core
 	/**
 	 * The Camera2D class creates a virtual camera object.
 	 * <p>
-	 * The virtual camera calculates horizontal and vertical scrolling based on the camera target and the boundry.
+	 * The virtual camera calculates horizontal and vertical scrolling based on the camera target and the boundary.
 	 * This class is the foundation for parallax scrolling, 
 	 * the illusion that objects move slower the further away from the camera they are.
 	 * </p>
@@ -55,13 +55,13 @@ package com.normsoule.pixelblitz.core
 		
 		/**
 		 * @private
-		 * Defines the boundry limits for the camera.
+		 * Defines the boundary limits for the camera.
 		 * <p>
-		 * The camera will not move outside of the boundry Rectangle.
+		 * The camera will not move outside of the boundary Rectangle.
 		 * </p>
 		 * @default a new Rectangle of the default size
 		 */
-		public var boundry:Rectangle = new Rectangle();
+		public var boundary:Rectangle = new Rectangle();
 		
 		/**
 		 * @private
@@ -108,40 +108,40 @@ package com.normsoule.pixelblitz.core
 		private function scrollTarget():void
 		{	
 			// horizontal
-			if ( target.x < boundry.right && target.x > boundry.left )
+			if ( target.x < boundary.right && target.x > boundary.left )
 			{
-				distX = boundry.left - target.x - basePoint.x;
+				distX = boundary.left - target.x - basePoint.x;
 				basePoint.x += distX * ease;
 			}
 			else
 			{
-				if ( target.x > boundry.right )
+				if ( target.x > boundary.right )
 				{
-					distX = boundry.left - ( boundry.right + basePoint.x ); 
+					distX = boundary.left - ( boundary.right + basePoint.x ); 
 					basePoint.x += distX * ease;
 				}
-				 if ( target.x < boundry.left )
+				 if ( target.x < boundary.left )
 				{
-					distX = boundry.left - ( boundry.left + basePoint.x ); 
+					distX = boundary.left - ( boundary.left + basePoint.x ); 
 					basePoint.x += distX * ease;
 				}
 			}
 			// vertical
-			if ( target.y < boundry.bottom && target.y > boundry.top )
+			if ( target.y < boundary.bottom && target.y > boundary.top )
 			{
-				distY = boundry.top - target.y - basePoint.y;
+				distY = boundary.top - target.y - basePoint.y;
 				basePoint.y += distY * ease;
 			}
 			else
 			{
-				if ( target.y > boundry.bottom )
+				if ( target.y > boundary.bottom )
 				{
-					distY = boundry.top - ( boundry.bottom + basePoint.y ); 
+					distY = boundary.top - ( boundary.bottom + basePoint.y ); 
 					basePoint.y += distY * ease;
 				}
-				if ( target.y < boundry.top )
+				if ( target.y < boundary.top )
 				{
-					distY = boundry.top - ( boundry.top + basePoint.y ); 
+					distY = boundary.top - ( boundary.top + basePoint.y ); 
 					basePoint.y += distY * ease;
 				}
 			}
