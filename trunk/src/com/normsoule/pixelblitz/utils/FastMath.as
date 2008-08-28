@@ -8,6 +8,8 @@
 	 */
 	public class FastMath 
 	{
+		private static const RADTODEG:Number = 180 / Math.PI;
+		private static const DEGTORAD:Number = Math.PI / 180;
 		
 		public function FastMath() 
 		{
@@ -50,6 +52,31 @@
 			return b;
 		}
 		
+		/**
+		 * Converts a Radian value into a Degree
+		 * <p>
+		 * Converts the radians value into degrees and returns
+		 * </p>
+		 * @param radians The value in radians
+		 * @return Number Degrees
+		 */
+		public function asDegrees( radians:Number ):Number
+		{
+			return radians * RADTODEG;
+		}
+		
+		/**
+		 * Converts a Degrees value into a Radian
+		 * <p>
+		 * Converts the degrees value into radians and returns
+		 * </p>
+		 * @param degrees The value in degrees
+		 * @return Number Radians
+		 */
+		public function asRadians( degrees:Number ):Number
+		{
+			return degrees * DEGTORAD;
+		}
 		
 		
 	}
