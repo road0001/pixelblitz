@@ -1,17 +1,14 @@
-﻿package com.normsoule.pixelblitz.utils 
+﻿package pixelblitz.utils 
 {
 	/**
-	 * The FastMath utility class adds a set of extremely fast (or extended) math functions to AS3
-	 * <p>
-	 * This class adds a selection of extremely fast (or extended) math functions
-	 * </p>
+	 * The BlitzMath utility class adds a set of extremely fast (or extended) math functions to AS3
 	 */
-	public class FastMath 
+	public class BlitzMath 
 	{
 		private static const RADTODEG:Number = 180 / Math.PI;
 		private static const DEGTORAD:Number = Math.PI / 180;
 		
-		public function FastMath() 
+		public function BlitzMath()
 		{
 		}
 
@@ -51,6 +48,27 @@
 			
 			return b;
 		}
+		
+		public function randomUInt():uint
+		{
+			
+		}
+		
+		public function randomInt():int
+		{
+			
+		}
+		
+		public function randomFloat():Number
+		{
+			
+		}
+		
+		public function randomBoolean():Boolean
+		{
+			// 50/50 chance of getting a true or false back! :)
+		}
+		
 		
 		/**
 		 * Converts a Radian value into a Degree

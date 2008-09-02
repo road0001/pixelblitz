@@ -1,8 +1,8 @@
-package com.normsoule.pixelblitz.layers
+package pixelblitz.layers
 {	
-	import com.normsoule.pixelblitz.core.Renderer2D;
-	import com.normsoule.pixelblitz.effects.IEffect;
-	import com.normsoule.pixelblitz.elements.PixelSprite;
+	import pixelblitz.core.Renderer2D;
+	import pixelblitz.effects.IEffect;
+	import pixelblitz.elements.PixelSprite;
 	
 	import flash.display.BitmapData;
 	import flash.display.GradientType;

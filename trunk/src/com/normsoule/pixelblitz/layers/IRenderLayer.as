@@ -1,6 +1,6 @@
-package com.normsoule.pixelblitz.layers
+package pixelblitz.layers
 {
-	import com.normsoule.pixelblitz.core.Renderer2D;
+	import pixelblitz.core.Renderer2D;
 	
 	/**
 	 * The IRenderLayer interface is implemented by objects that could be added to the Renderer2D and rendered.

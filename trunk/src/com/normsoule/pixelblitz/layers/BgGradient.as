@@ -1,4 +1,4 @@
-package com.normsoule.pixelblitz.layers
+package pixelblitz.layers
 {
 	/**
 	 * The BgGradient class defines constants for working with BGLayer instances.

@@ -1,4 +1,4 @@
-package com.normsoule.pixelblitz.core
+package pixelblitz.core
 {	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;

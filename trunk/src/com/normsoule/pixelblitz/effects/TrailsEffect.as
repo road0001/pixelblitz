@@ -1,4 +1,4 @@
-package com.normsoule.pixelblitz.effects
+package pixelblitz.effects
 {
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;

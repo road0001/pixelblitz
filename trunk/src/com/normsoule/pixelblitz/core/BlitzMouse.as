@@ -2,7 +2,7 @@
 * PixelBlitz Engine - BlitzMouse Input Class
 * @author Richard Davey / Photon Storm
 */
-package com.normsoule.pixelblitz.core 
+package pixelblitz.core 
 {
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
