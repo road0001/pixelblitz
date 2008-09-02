@@ -349,6 +349,44 @@ package com.normsoule.pixelblitz.core
 					}
 				}
 			}
+			
+			//	Key Combo Function calls
+			if (checkKeyboardCalls)
+			{
+				for each (var f:Array in keyboardCalls)
+				{
+					//	Should it fire onRelease? ([1])
+					if (f[1])
+					{
+						//	Have we captured these keys going down yet? If so, fire the event
+						if (f[2])
+						{
+							if (isUp(f[3], f[4], f[5]))
+							{
+								//	Ok the keys have been pressed and then let-up again, so call the function
+								f[0].call();
+								//	and reset the marker
+								keyboardCalls[f[6]][2] = false;
+							}
+						}
+						else
+						{
+							if (isDown(f[3], f[4], f[5]))
+							{
+								keyboardCalls[f[6]][2] = true;
+							}
+						}
+					}
+					else
+					{
+						//	Should fire on Key Down
+						if (isDown(f[3], f[4], f[5]))
+						{
+							f[0].call();
+						}
+					}
+				}
+			}
 		}
 		
 		/**
