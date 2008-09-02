@@ -51,22 +51,23 @@
 		
 		public function randomUInt():uint
 		{
-			
+			return 0;
 		}
 		
 		public function randomInt():int
 		{
-			
+			return 0;
 		}
 		
 		public function randomFloat():Number
 		{
-			
+			return 0;
 		}
 		
 		public function randomBoolean():Boolean
 		{
 			// 50/50 chance of getting a true or false back! :)
+			return true;
 		}
 		
 		
