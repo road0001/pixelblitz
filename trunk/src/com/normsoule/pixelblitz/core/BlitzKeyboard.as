@@ -242,7 +242,7 @@ package com.normsoule.pixelblitz.core
 		 */
 		public function go():void
 		{
-			if (listenObject.stage !== null)
+			if (keyboardDisplayObject.stage !== null)
 			{
 				startListeningKeyboard(new Event(Event.ADDED_TO_STAGE));
 			}
@@ -629,7 +629,7 @@ package com.normsoule.pixelblitz.core
 		 * Returns the keyLocation of the most recently pressed key
 		 * @return The keyLocation of the last key pressed
 		 */
-		public function get keyCode():uint
+		public function get keyLocation():uint
 		{
 			return lastKeyLocation;
 		}
