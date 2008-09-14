@@ -606,6 +606,7 @@ package pixelblitz.core
 		}
 		
 		/**
+		 * TODO Fix bug - onRelease doesn't fire properly on function calls
 		 * TODO Fix so it can handle multiple functions from one key combo + add event list support
 		 * Registers a Function that will be called every time this key (or key combination) is pressed.
 		 * If you have set a Key Rate then the Function will only be called as often as the Key Rate allows.

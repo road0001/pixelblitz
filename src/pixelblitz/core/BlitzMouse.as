@@ -47,10 +47,10 @@ package pixelblitz.core
 		private var limitY1:int;
 		private var limitX2:int;
 		private var limitY2:int;
-		private var allowMoveUp:Boolean;
-		private var allowMoveDown:Boolean;
-		private var allowMoveLeft:Boolean;
-		private var allowMoveRight:Boolean;
+		public var allowMoveUp:Boolean;
+		public var allowMoveDown:Boolean;
+		public var allowMoveLeft:Boolean;
+		public var allowMoveRight:Boolean;
 		public var allowHorizontalJumpback:Boolean;
 		public var allowVerticalJumpback:Boolean;
 		
@@ -327,8 +327,6 @@ package pixelblitz.core
 				//	Has it moved left / right ?
 				if (newX != mouseOldX)
 				{
-					mouseStationary = false;
-					
 					if (newX < mouseOldX)
 					{
 						//	The mouse has moved to the left
@@ -343,7 +341,10 @@ package pixelblitz.core
 						mouseDistanceX = newX - mouseOldX;
 						mouseXSpeed = mouseDistanceX / mouseDisplayObject.stage.frameRate;
 					}
-						
+					
+					mouseStationary = false;
+					mouseOldX = newX;
+					
 					//	Do we update the custom pointer?
 					if (useCustomPointer)
 					{
@@ -352,7 +353,6 @@ package pixelblitz.core
 							if ((allowHorizontalJumpback == false && newX < mousePointer.x) || allowHorizontalJumpback)
 							{
 								mousePointer.x = newX + pointerOffsetX;
-								mouseOldX = newX;
 							}
 						}
 						else if (allowMoveRight && mouseMovingRight && (allowHorizontalJumpback == false && newX > mousePointer.x))
@@ -360,13 +360,12 @@ package pixelblitz.core
 							if ((allowHorizontalJumpback == false && newX > mousePointer.x) || allowHorizontalJumpback)
 							{
 								mousePointer.x = newX + pointerOffsetX;
-								mouseOldX = newX;
 							}
 						}
-					}
-					else
-					{
-						mouseOldX = newX;
+						else if (allowMoveLeft && allowMoveRight)
+						{
+							mousePointer.x = newX + pointerOffsetX;
+						}
 					}
 				}
 				else
@@ -378,8 +377,6 @@ package pixelblitz.core
 				//	Has it moved up / down ?
 				if (newY != mouseOldY)
 				{
-					mouseStationary = false;
-					
 					if (newY < mouseOldY)
 					{
 						//	The mouse has moved up
@@ -394,6 +391,9 @@ package pixelblitz.core
 						mouseDistanceY = newY - mouseOldY;
 						mouseYSpeed = mouseDistanceY / mouseDisplayObject.stage.frameRate;
 					}
+					
+					mouseStationary = false;
+					mouseOldY = newY;
 						
 					//	Do we update the custom pointer?
 					if (useCustomPointer)
@@ -403,7 +403,6 @@ package pixelblitz.core
 							if ((allowVerticalJumpback == false && newY < mousePointer.y) || allowVerticalJumpback)
 							{
 								mousePointer.y = newY + pointerOffsetY;
-								mouseOldY = newY;
 							}
 						}
 						else if (allowMoveDown && mouseMovingDown && newY > mousePointer.y)
@@ -411,13 +410,12 @@ package pixelblitz.core
 							if ((allowVerticalJumpback == false && newY > mousePointer.y) || allowVerticalJumpback)
 							{
 								mousePointer.y = newY + pointerOffsetY;
-								mouseOldY = newY;
 							}
 						}
-					}
-					else
-					{
-						mouseOldY = newY;
+						else if (allowMoveUp && allowMoveDown)
+						{
+							mousePointer.y = newY + pointerOffsetY;
+						}
 					}
 				}
 				else
