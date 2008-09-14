@@ -16,13 +16,53 @@ package pixelblitz.utils
 		private var cosTable:Array;
 		private var sinTable:Array;
 		
+		private static var coefficient1:Number = Math.PI / 4;
 		private static const RADTODEG:Number = 180 / Math.PI;
 		private static const DEGTORAD:Number = Math.PI / 180;
 		
 		public function BlitzMath()
 		{
 		}
+		
+		/**
+		 * A faster (but much less accurate) version of Math.atan2(). For close range / loose comparisons this works very well, 
+		 * but avoid for long-distance or high accuracy simulations.
+		 * Based on: http://blog.gamingyourway.com/PermaLink,guid,78341247-3344-4a7a-acb2-c742742edbb1.aspx
+		 * <p>
+		 * Computes and returns the angle of the point y/x in radians, when measured counterclockwise from a circle's x axis 
+		 * (where 0,0 represents the center of the circle). The return value is between positive pi and negative pi. 
+		 * Note that the first parameter to atan2 is always the y coordinate.
+		 * </p>
+		 * @param y The y coordinate of the point
+		 * @param x The x coordinate of the point
+		 * @return The angle of the point x/y in radians
+		 */
+		public function atan2(y:Number, x:Number):Number
+		{
+			var absY:Number = y;
+			var coefficient2:Number = 3 * coefficient1;
+			var r:Number;
+			var angle:Number;
+			
+			if (absY < 0)
+			{
+				absY = -absY;
+			}
 
+			if (x >= 0)
+			{
+				r = (x - absY) / (x + absY);
+				angle = coefficient1 - coefficient1 * r;
+			}
+			else
+			{
+				r = (x + absY) / (absY - x);
+				angle = coefficient2 - coefficient1 * r;
+			}
+    
+			return y < 0 ? -angle : angle;
+		}
+		
 		/**
 		 * Experimental - Much faster version of v % d only for when d is any power of 2
 		 * @param value The amount to divide
