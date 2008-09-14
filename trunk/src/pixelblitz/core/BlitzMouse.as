@@ -492,8 +492,8 @@ package pixelblitz.core
 		 */
 		public function distanceToObject(displayObject:DisplayObject, round:Boolean = true):Number
 		{
-			var dx:Number = displayObject.x - x;
-			var dy:Number = displayObject.y - y;
+			var dx:Number = displayObject.x - mouseOldX;
+			var dy:Number = displayObject.y - mouseOldY;
 			
 			var distance:Number = bMath.sqrt(dx * dx + dy * dy);
 			
