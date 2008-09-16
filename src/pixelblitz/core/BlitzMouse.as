@@ -42,7 +42,8 @@ package pixelblitz.core
 		
 		private var mouseLimited:Boolean;
 		private var mouseWithinLimit:Boolean;
-		private var mouseLimitAutohide:Boolean;
+		private var mouseLimitAutohideCustom:Boolean;
+		private var mouseLimitAutohideStandard:Boolean;
 		private var limitX1:int;
 		private var limitY1:int;
 		private var limitX2:int;
@@ -88,6 +89,7 @@ package pixelblitz.core
 			removeMovementLimits();
 			
 			mouseDisplayObject = listenObject;
+			
 			trackMouse = enableTracking;
 				
 			if (mouseDisplayObject.stage !== null)
@@ -205,7 +207,7 @@ package pixelblitz.core
 			}
 		}
 		
-		public function limit(zone:Rectangle, autoHide:Boolean = false):void
+		public function limit(zone:Rectangle, autoHideCustom:Boolean = true, autoHideStandard:Boolean = false):void
 		{
 			limitX1 = zone.x
 			limitY1 = zone.y;
@@ -213,7 +215,8 @@ package pixelblitz.core
 			limitY2 = zone.bottom;
 			
 			mouseLimited = true;
-			mouseLimitAutohide = autoHide;
+			mouseLimitAutohideCustom = autoHideCustom;
+			mouseLimitAutohideStandard = autoHideStandard;
 		}
 		
 		public function removeLimit():void
@@ -249,14 +252,27 @@ package pixelblitz.core
 			{
 				mouseWithinLimit = false;
 				
-				if (mouseLimitAutohide && mouseHidden == false)
-				{
-					hide();
-				}
-				
-				if (useCustomPointer && mousePointer.visible == true)
+				//	Using a custom pointer
+				if (useCustomPointer && mouseLimitAutohideCustom && mousePointer.visible == true)
 				{
 					mousePointer.visible = false;
+				}
+				
+				//	Is the standard mouse outisde the limit? If autohide is on, we should hide it
+				if (mouseLimitAutohideStandard)
+				{
+					if (mouseHidden == false)
+					{
+						hide();
+					}
+				}
+				else
+				{
+					//	Otherwise we should show it again ...
+					if (mouseHidden)
+					{
+						show();
+					}
 				}
 				
 				return false;
@@ -265,16 +281,22 @@ package pixelblitz.core
 			{
 				mouseWithinLimit = true;
 				
-				if (mouseLimitAutohide && mouseHidden)
+				if (useCustomPointer)
 				{
-					show();
+					if (mousePointer.visible == false)
+					{
+						mousePointer.visible = true;
+						hide();
+					}
 				}
-				
-				if (useCustomPointer && mousePointer.visible == false)
+				else
 				{
-					mousePointer.visible = true;
+					if (mouseHidden)
+					{
+						show();
+					}
 				}
-				
+
 				return true;
 			}
 		}
