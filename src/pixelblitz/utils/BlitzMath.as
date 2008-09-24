@@ -211,9 +211,10 @@ package pixelblitz.utils
 		 * </p>
 		 * @param min The lowest value to return (default: 0)
 		 * @param max The highest value to return (default: getrandmax)
+		 * @param excludes An Array of integers that will NOT be returned (default: null)
 		 * @return A pseudo-random value between min (or 0) and max (or getrandmax, inclusive)
 		 */
-		public function rand(min:Number = NaN, max:Number = NaN):int
+		public function rand(min:Number = NaN, max:Number = NaN, excludes:Array = null):int
 		{
 			if (isNaN(min))
 			{
@@ -229,13 +230,39 @@ package pixelblitz.utils
 			{
 				return min;
 			}
-			else if (min < max)
+			
+			if (excludes != null)
 			{
-				return min + (Math.random() * max);
+				//	Sort the exclusion array
+				excludes.sort(Array.NUMERIC);
+				
+				var result:int;
+				
+				do {
+					if (min < max)
+					{
+						result = min + (Math.random() * max);
+					}
+					else
+					{
+						result = max + (Math.random() * min);
+					}
+				}
+				while (excludes.indexOf(result) >= 0);
+				
+				return result;
 			}
 			else
 			{
-				return max + (Math.random() * min);
+				//	Reverse check
+				if (min < max)
+				{
+					return min + (Math.random() * max);
+				}
+				else
+				{
+					return max + (Math.random() * min);
+				}
 			}
 		}
 		

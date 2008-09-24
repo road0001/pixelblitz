@@ -74,6 +74,9 @@ package pixelblitz.core
 		private var pointerOffsetX:int;
 		private var pointerOffsetY:int;
 		
+		//	Mouse zones
+		private var zones:Array;
+		
 		public function BlitzMouse():void
 		{
 		}
@@ -146,6 +149,92 @@ package pixelblitz.core
 				mouseOldY = mouseDisplayObject.mouseY;
 				startTrackingMouse();
 			}
+		}
+		
+		public function addZone(area:Rectangle):uint
+		{
+			if (zones == null)
+			{
+				zones = new Array();
+			}
+			
+			zones.push(area);
+			
+			return zones.length;
+		}
+		
+		//	Merges zones1 and 2 together, replacing zone 1
+		public function mergeZones(zone1:uint, zone2:uint):Boolean
+		{
+			//	The actual array position is zero based, so offset them
+			zone1--;
+			zone2--;
+			
+			if (typeof(zones[zone1]) is Rectangle && typeof(zones[zone2]) is Rectangle)
+			{
+				zones[zone1] = zones[zone1].union(zones[zone2]);
+				
+				zones.slice(zone2, zone2);
+				
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
+		public function removeZone(zoneID:uint):void
+		{
+			//	The actual array position is zero based, so offset
+			zoneID--;
+			
+			if (typeof(zones[zoneID]) is Rectangle)
+			{
+				zones.slice(zoneID, zoneID);
+			}
+		}
+		
+		//	Reset (clear) all zones
+		public function resetZones():void
+		{
+			zones = null;
+		}
+		
+		//	Returns the zone ID that the mouse is currently in
+		public function getZone():uint
+		{
+			var z:uint = 0;
+			
+			for each (var zone:Rectangle in zones)
+			{
+				if (zone.contains(mouseOldX, mouseOldY))
+				{
+					return z+1;
+				}
+				else
+				{
+					z++;
+				}
+			}
+			
+			return 0;
+		}
+		
+		public function checkZone(zoneID:uint):Boolean
+		{
+			//	The actual array position is zero based, so offset
+			zoneID--;
+			
+			if (zones[zoneID] !== null)
+			{
+				if (zones[zoneID].contains(mouseOldX, mouseOldY))
+				{
+					return true;
+				}
+			}
+	
+			return false;
 		}
 		
 		public function limitMovement(up:Boolean, down:Boolean, left:Boolean, right:Boolean):void
