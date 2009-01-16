@@ -336,6 +336,48 @@ package pixelblitz.utils
 		}
 		
 		/**
+		 * Adds the given amount to the value, but never lets the value go over the specified maximum
+		 * @param value The value to add the amount to
+		 * @param amount The amount to add to the value
+		 * @param max The maximum the value is allowed to be
+		 * @return The new value
+		 */
+		public function maxAdd(value:int, amount:int, max:int):int
+		{
+			value += amount;
+			
+			if (value > max)
+			{
+				value = max;
+			}
+			
+			return value;
+		}
+		
+		/**
+		 * Adds the given amount to the value, but if the new value is above max then it wraps around to zero and adds from there
+		 * @param value The value to add the amount to
+		 * @param amount The amount to add to the value
+		 * @param max The maximum the value is allowed to be
+		 * @return The new value
+		 */
+		public function wrapValue(value:int, amount:int, max:int):int
+		{
+			var diff:int;
+			
+			if (value + amount > max)
+			{
+				diff = (value + amount) - max;
+			}
+			else
+			{
+				diff = value + amount;
+			}
+			
+			return diff;
+		}
+		
+		/**
 		 * Converts a Radian value into a Degree
 		 * <p>
 		 * Converts the radians value into degrees and returns
